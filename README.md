@@ -1,20 +1,39 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Panchayat Portal
 
-# Run and deploy your AI Studio app
+Cooperative Housing Management Platform - Full-Stack SaaS Application
 
-This contains everything you need to run your app locally.
+## Features
 
-View your app in AI Studio: https://ai.studio/apps/8e7b2856-2dca-42f6-a05a-e2b8658a0b20
+- 🏠 Multi-tenant housing society management
+- 👥 Role-based access control (Residents & Admins)
+- 📋 Complaint & Grievance Management System
+- 🔧 Service Request & Staff Booking
+- 📢 Notice Board & Real-time Notifications
+- 🚨 SOS Alert System with Geolocation
+- 💳 Subscription Management & Secure Payments
+- 🤖 AI-powered Rules Assistant (Gemini API)
+- 📱 Mobile-responsive PWA + Native Android APK
 
-## Run Locally
+## Tech Stack
 
-**Prerequisites:**  Node.js
+- **Frontend:** React 18+, TypeScript, Tailwind CSS, Framer Motion
+- **Backend:** Node.js, Express.js
+- **Mobile:** Capacitor, PWA
+- **Database:** Multi-tenant Architecture
+- **APIs:** Google Gemini, Payment Gateway (UPI/Card)
 
+## Installation
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```bash
+npm install
+npm run dev
+```
+
+## Live Testing
+
+- USB Debugging: `adb reverse tcp:5173 tcp:5173`
+- Phone: Open `http://localhost:5173`
+
+## Author
+
+Pranjal Raj | [GitHub](https://github.com/prnjl-rj)
