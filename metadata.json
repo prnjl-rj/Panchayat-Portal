@@ -1,0 +1,10 @@
+{
+  "name": "Remix: Panchayat",
+  "description": "Unified society management platform with AI-power audio complaints, directory of daily services, local notifications, and an AI Resident Assistant to answer questions about the rules of the society.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
