@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Check, Bell, BellOff, Trash2, ShieldAlert, Cpu, Wrench, Megaphone, UserCheck } from "lucide-react";
+import { X, Check, Bell, BellOff, Trash2, ShieldAlert, Cpu, Wrench, Megaphone, UserCheck } from "lucide-react-native";
 
 // Local Notification type to avoid missing import error
 interface Notification {
@@ -29,13 +29,13 @@ export default function NotificationDrawer({
   const getIcon = (type: string) => {
     switch (type) {
       case "complaint":
-        return <Wrench className="w-4 h-4 text-rose-600" />;
+        return <Wrench size={16} color="#dc2626" />;
       case "announcement":
-        return <Megaphone className="w-4 h-4 text-amber-600" />;
+        return <Megaphone size={16} color="#d97706" />;
       case "visitor":
-        return <UserCheck className="w-4 h-4 text-emerald-600" />;
+        return <UserCheck size={16} color="#059669" />;
       default:
-        return <Bell className="w-4 h-4 text-blue-600" />;
+        return <Bell size={16} color="#2563eb" />;
     }
   };
 
@@ -83,7 +83,7 @@ export default function NotificationDrawer({
             <div className="px-5 pb-3 border-b border-neutral-50 flex items-center justify-between">
               <div>
                 <h3 className="font-display font-semibold text-lg text-neutral-800 flex items-center gap-2">
-                  <Bell className="w-5 h-5 text-brand-emerald" />
+                  <Bell size={20} color="#10b981" />
                   Society Notifications
                 </h3>
                 <p className="text-xs text-neutral-500">
@@ -98,7 +98,7 @@ export default function NotificationDrawer({
                     className="p-2 text-xs text-brand-emerald hover:bg-neutral-50 active:bg-neutral-100 rounded-full font-medium transition-colors flex items-center gap-1"
                     title="Mark all read"
                   >
-                    <Check className="w-4 h-4" />
+                    <Check size={16} color="#10b981" />
                     Read All
                   </button>
                 )}
@@ -108,7 +108,7 @@ export default function NotificationDrawer({
                   className="p-1.5 bg-neutral-50 rounded-full text-neutral-500 hover:text-neutral-800 transition-colors"
                   title="Close notifications"
                 >
-                  <X className="w-4 h-4" />
+                  <X size={16} color="#6b7280" />
                 </button>
               </div>
             </div>
@@ -117,7 +117,7 @@ export default function NotificationDrawer({
             <div className="overflow-y-auto no-scrollbar flex-1 p-4 space-y-3">
               {notifications.length === 0 ? (
                 <div className="py-12 flex flex-col items-center text-center">
-                  <BellOff className="w-12 h-12 text-neutral-300 mb-2.5" />
+                  <BellOff size={48} color="#d1d5db" />
                   <p className="font-display font-medium text-neutral-600 text-sm">All Quiet on the Front!</p>
                   <p className="text-xs text-neutral-400 mt-1 max-w-[200px]">You have no recent notifications or booking alert updates.</p>
                 </div>
@@ -162,7 +162,7 @@ export default function NotificationDrawer({
                         className="text-neutral-400 hover:text-rose-600 active:scale-95 absolute bottom-3 right-3 p-1 rounded transition-colors"
                         title="Delete alert"
                       >
-                        <Trash2 className="w-3.5 h-3.5" />
+                        <Trash2 size={14} color="#9ca3af" />
                       </button>
                     </motion.div>
                   ))}
@@ -172,7 +172,7 @@ export default function NotificationDrawer({
 
             {/* Quick Helper Notice */}
             <div className="p-3.5 bg-neutral-50/50 border-t border-neutral-100 text-center flex items-center justify-center gap-1.5 text-[10px] text-neutral-400 font-mono">
-              <Cpu className="w-3.5 h-3.5 text-brand-emerald" />
+              <Cpu size={14} color="#10b981" />
               <span>PANCHAYAT REALTIME DESPATCH KERNEL</span>
             </div>
           </motion.div>
