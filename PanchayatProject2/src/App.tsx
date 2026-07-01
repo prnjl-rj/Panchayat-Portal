@@ -1,5 +1,27 @@
+// import { StatusBar } from 'expo-status-bar';
+// import { StyleSheet, Text, View } from 'react-native';
+
+// export default function App() {
+//   return (
+//     <View style={styles.container}>
+//       <Text>Open up App.tsx to start working on your app!</Text>
+//       <StatusBar style="auto" />
+//     </View>
+//   );
+// }
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#fff',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },
+// });
+
+
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
 import { 
   Building2, 
   Home, 
@@ -19,24 +41,130 @@ import {
   Lock,
   MessageCircle,
   Mail
-} from "lucide-react";
+} from "lucide-react-native";
 
 // Subviews
-import HomeView from "./components/HomeView";
-import ServicesView from "./components/ServicesView";
-import ComplaintsView from "./components/ComplaintsView";
-import RulebookView from "./components/RulebookView";
-import NoticeBoardView from "./components/NoticeBoardView";
-import NotificationDrawer from "./components/NotificationDrawer";
-import LoginScreen from "./components/LoginScreen";
-import OfflineMap from "./components/OfflineMap";
-import UserProfileModal from "./components/UserProfileModal";
-import ChatView from "./components/ChatView";
-import GmailView from "./components/GmailView";
-import OwnerDashboard from "./components/OwnerDashboard";
+import HomeView from "../components/HomeView";
+import ComplaintsView from "../components/ComplaintsView";
+import RulebookView from "../components/RulebookView";
+import NoticeBoardView from "../components/NoticeBoardView";
+import ServicesView from "../components/ServicesView";
+import ChatView from "../components/ChatView";
+import NotificationDrawer from "../components/NotificationDrawer";
+import LoginScreen from "../components/LoginScreen";
+import OfflineMap from "../components/OfflineMap";
+import UserProfileModal from "../components/UserProfileModal";
+import GmailView from "../components/GmailView";
+import OwnerDashboard from "../components/OwnerDashboard";
 
-// Types
-import { Complaint, ServiceStaff, ServiceRequest, Notification, VisitorRecord, Announcement, Transaction, Society, AppUser, SosAlert } from "./types";
+// Local type definitions (inlined to avoid missing external ./types module)
+type ID = string;
+export interface AppUser {
+  id: ID;
+  name: string;
+  email?: string;
+  flatNumber?: string;
+  phone?: string;
+  societyId?: ID;
+  role?: string;
+  subscriptionType?: string;
+  subscriptionExpiresAt?: string;
+  createdAt?: string;
+  isRegisteredResident?: boolean;
+}
+
+export interface Society {
+  id: ID;
+  name: string;
+  address?: string;
+  city?: string;
+  adminName?: string;
+  adminPhone?: string;
+  unitsCount?: number;
+  registeredAt?: string;
+  rules?: string[];
+}
+
+export interface Notification {
+  id: ID;
+  type: string;
+  title: string;
+  message: string;
+  timestamp: string;
+  isRead: boolean;
+}
+
+export interface Complaint {
+  id: ID;
+  title: string;
+  description?: string;
+  raisedBy?: ID;
+  status?: string;
+  createdAt?: string;
+}
+
+export interface ServiceStaff {
+  id: ID;
+  name: string;
+  role?: string;
+  category?: string;
+  phone?: string;
+}
+
+export interface ServiceRequest {
+  id: ID;
+  serviceType: string;
+  requesterId?: ID;
+  staffId?: ID;
+  staffName?: string;
+  category?: string;
+  flatNumber?: string;
+  timeSlot?: string;
+  status?: string;
+  paymentStatus?: string;
+  transactionId?: string;
+  createdAt?: string;
+  timestamp?: string;
+}
+
+export interface VisitorRecord {
+  id: ID;
+  name: string;
+  vehicle?: string;
+  visitedAt?: string;
+}
+
+export interface Announcement {
+  id: ID;
+  title: string;
+  content?: string;
+  sender?: string;
+  priority?: "High" | "Normal";
+  postedAt?: string;
+  date?: string;
+}
+
+export interface Transaction {
+  id: ID;
+  requestId?: ID;
+  staffName?: string;
+  category?: string;
+  amount: number;
+  paymentMethod?: 'UPI' | 'Card' | 'NetBanking';
+  status?: string;
+  timestamp?: string;
+  transactionId?: string;
+  date?: string;
+  description?: string;
+}
+
+export interface SosAlert {
+  id: ID;
+  userId: ID;
+  location?: { lat: number; lng: number } | null;
+  triggeredAt?: string;
+  active?: boolean;
+}
 
 export default function App() {
   const [currentUser, setCurrentUser] = useState<AppUser | null>({
@@ -269,6 +397,7 @@ export default function App() {
       // Client offline fallback insertion
       const mockNew: ServiceRequest = {
         id: `req-${Math.random()}`,
+        serviceType: "StaffBooking",
         staffId,
         staffName: staffList.find(s => s.id === staffId)?.name || "Technician",
         category: staffList.find(s => s.id === staffId)?.category || "Field Help",
@@ -638,7 +767,7 @@ export default function App() {
                 syncStateData(true, u.societyId); 
               }} 
             />
-          ) : new Date(currentUser.subscriptionExpiresAt).getTime() < Date.now() ? (
+          ) : (currentUser.subscriptionExpiresAt && new Date(currentUser.subscriptionExpiresAt).getTime() < Date.now()) ? (
             <div className="flex-1 bg-[#1e293b] text-white z-40 flex flex-col justify-between p-6 overflow-y-auto text-left relative">
               <div className="flex flex-col items-center mt-6 text-center shrink-0">
                 <div className="w-14 h-14 bg-red-950 border border-red-500 rounded-2xl flex items-center justify-center text-red-500 mb-3.5 shadow-lg shadow-red-500/10 animate-pulse">
